@@ -1,4 +1,5 @@
-package Testing;
+package myMath;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,7 +8,7 @@ import org.junit.rules.ErrorCollector;
 
 import myMath.Monom;
 
-class MonomTest2 {
+class MonomTest {
 
 
 

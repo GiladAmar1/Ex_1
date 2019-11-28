@@ -135,7 +135,7 @@ public class Polynom implements Polynom_able{
 	 * 
 	 */
 	@Override
-	public boolean equals(Polynom_able p1) {
+	public boolean equals (Object p1){
 		// TODO Auto-generated method stub
 
 		return this.toString().equals(p1.toString());
@@ -225,7 +225,10 @@ public class Polynom implements Polynom_able{
 		for (double i = x0; i <= x1; i+=eps) {
 			ans+=this.f(i)*eps;
 		}
-		return ans;
+		 String ans2=String.format("%.5g%n", ans);
+		// System.out.println(Double.parseDouble(ans2));
+		return Double.parseDouble(ans2);
+		
 	}
 
 	/**
@@ -252,6 +255,11 @@ public class Polynom implements Polynom_able{
 	 */
 	public String toString() {
 		return this.p.toString();		
+	}
+	@Override
+	public function initFromString(String s) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

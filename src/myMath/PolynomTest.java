@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
-class PolynomTest2 {
+class PolynomTest {
 
 	@Test
 	void testPolynom() {
@@ -129,7 +129,7 @@ class PolynomTest2 {
 	@Test
 	void testArea() {
 		Polynom x=new Polynom("6x+2");
-		assertEquals(4.999996999997673, x.area(0, 1, 0.000001));
+		assertEquals(16, x.area(0, 2, 0.000001));
 		//System.out.println(x.area(0, 1, 0.000001));
 	}
 
