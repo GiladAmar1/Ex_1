@@ -1,5 +1,6 @@
 package myMath;
 
+
 	import static org.junit.jupiter.api.Assertions.*;
 
 	import org.junit.jupiter.api.Test;
@@ -7,9 +8,8 @@ package myMath;
 
 	import myMath.Monom;
 
-	class MonomTest2 {
 
-
+class MonomTest {
 
 		@Test
 		void testMonomDoubleInt() {
