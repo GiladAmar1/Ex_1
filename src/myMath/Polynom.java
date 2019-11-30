@@ -234,7 +234,7 @@ public class Polynom implements Polynom_able{
 			ans+=this.f(i)*eps;
 		}
 		 String ans2=String.format("%.5g%n", ans);
-		
+		// System.out.println(Double.parseDouble(ans2));
 		return Double.parseDouble(ans2);
 		
 	}
