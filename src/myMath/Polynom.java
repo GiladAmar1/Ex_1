@@ -108,8 +108,9 @@ public class Polynom implements Polynom_able{
 	public void substract(Polynom_able p1) {
 		// TODO Auto-generated method stub
 		Monom t=new Monom(-1,0);
-		p1.multiply(t);
-		this.add(p1);
+		Polynom x=(Polynom) p1.copy();
+		x.multiply(t);
+		this.add(x);
 	}
 
 	/**
@@ -137,8 +138,16 @@ public class Polynom implements Polynom_able{
 	@Override
 	public boolean equals (Object p1){
 		// TODO Auto-generated method stub
-
-		return this.toString().equals(p1.toString());
+		Iterator<Monom> it= this.iteretor();
+		Iterator<Monom> it2= ((Polynom) p1).iteretor();
+		while(it.hasNext()&&it2.hasNext()) {
+			double sum=it.next().get_coefficient()-it2.next().get_coefficient();
+			if(Math.abs(sum)<=0.0000001) {
+				return true;
+			}
+		}
+			return false;
+		
 	}
 	
 	/**
@@ -220,7 +229,6 @@ public class Polynom implements Polynom_able{
 	@Override
 	public double area(double x0, double x1, double eps) {
 		// TODO Auto-generated method stub
-
 		double ans=0;
 		for (double i = x0; i <= x1; i+=eps) {
 			ans+=this.f(i)*eps;

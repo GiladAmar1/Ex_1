@@ -128,8 +128,8 @@ class PolynomTest {
 
 	@Test
 	void testArea() {
-		Polynom x=new Polynom("6x+2");
-		assertEquals(16, x.area(0, 2, 0.000001));
+		Polynom x=new Polynom("6x+2.3");
+		assertEquals(16.6, x.area(0, 2, 0.000001));
 		//System.out.println(x.area(0, 1, 0.000001));
 	}
 
