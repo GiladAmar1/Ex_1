@@ -142,11 +142,13 @@ public class Polynom implements Polynom_able{
 		Iterator<Monom> it2= ((Polynom) p1).iteretor();
 		while(it.hasNext()&&it2.hasNext()) {
 			double sum=it.next().get_coefficient()-it2.next().get_coefficient();
-			if(Math.abs(sum)<=0.0000001) {
-				return true;
+			if(Math.abs(sum)>=0.0000001) {
+				return false;
 			}
 		}
-			return false;
+		
+		
+			return true;
 		
 	}
 	
