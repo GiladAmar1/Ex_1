@@ -76,7 +76,7 @@ class PolynomTest {
 		x.substract(y);
 		assertEquals(true,x.equals(z));
 		x.substract(x);
-		assertEquals(new Polynom(), x);
+		assertEquals(true, x.isZero());
 	}
 
 	@Test
@@ -95,7 +95,9 @@ class PolynomTest {
 		//System.out.println(x);
 		//System.out.println(x.equals(y));
 		assertEquals(true, x.equals(y));
+		assertEquals(x, new Polynom(x.toString()));
 	}
+
 
 	@Test
 	void testIsZero() {
@@ -112,13 +114,17 @@ class PolynomTest {
 		//System.out.println(y.root(4,6,0.00001));
 		assertEquals(7,y.root(6,8,0.00001));
 		//System.out.println(y.root(6,8,0.00001));
+
+
 	}
 
 	@Test
 	void testCopy() {
 		Polynom x=new Polynom("3x^2-6x+3");
 		Polynom_able y=x.copy();
-		assertEquals(true, x.equals(y));
+		y.add(new Monom(-3,2));
+		assertEquals(false, x.equals(y));
+		assertEquals(y, new Polynom("-6x+3"));
 	}
 
 	@Test
@@ -134,6 +140,10 @@ class PolynomTest {
 		double a= x.area(0, 2, 0.000001);
 		assertEquals(true, a-16.6<0.001);
 		//System.out.println(x.area(0, 1, 0.000001));
+		Polynom p=new Polynom("x^3+4x^2-5");
+		//check the approximated area above X-axis
+		assertEquals(p.area(0, 1, 0.0001), 0);
+		assertEquals(p.area(-3.618, 0, 0.0001),(p.area(-3.618, 1, 0.0001)));
 	}
 
 	@Test
@@ -144,7 +154,7 @@ class PolynomTest {
 		x.multiply(y);
 		assertEquals(true,z.equals(x));
 	}
-	
+
 	@Test
 	void testToString() {
 		Polynom_able p1 = new Polynom();
@@ -155,8 +165,7 @@ class PolynomTest {
 		}
 		assertEquals(p1, new Polynom(p1.toString()));
 		assertEquals(p1, new Polynom("7+9x^2-1.5x^3-x^7"));
-		
 	}
-	
+
 
 }

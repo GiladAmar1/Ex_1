@@ -13,10 +13,10 @@ public class PolynomTestEvgeny {
 
 			fails = fails + 3;
 		}
-//		try {test3();}catch (Exception e) {
-//			System.out.println("test3 exception");
-//			fails = fails + 3;
-//		}
+		try {test3();}catch (Exception e) {
+			System.out.println("test3 exception");
+			fails = fails + 3;
+		}
 		try {test4();}catch (Exception e) {
 			System.out.println("test4 exception");
 			fails = fails + 3;

@@ -175,8 +175,10 @@ public class Polynom implements Polynom_able{
 
 		if (this.f(0)==0&&x0<=0&&x1>=0)
 			return 0;
-		if(this.f(x0)*this.f(x1)>=0) 
+		if(this.f(x0)*this.f(x1)>0) 
 			throw new RuntimeException("not can solve in this range");
+		if(this.f(x0)>-eps&&this.f(x0)<eps) return x0;
+		if(this.f(x1)>-eps&&this.f(x1)<eps) return x1;
 		double mid=(x0+x1)/2;
 		if(Math.abs(this.f(mid))<eps)
 			return mid;
@@ -228,15 +230,14 @@ public class Polynom implements Polynom_able{
 	public double area(double x0, double x1, double eps) {
 		// TODO Auto-generated method stub
 
-		//		if (this.f(x1)<0)
-		//			return 0;
 		double ans=0;
 		for (double i = x0+eps; i <= x1; i+=eps) {
-			ans+=this.f(i)*eps;
+			if(f(i)>0)
+				ans+=this.f(i)*eps;
 		}
 
-//		System.out.println(ans);
-		return Math.abs(ans);
+		//		System.out.println(ans);
+		return ans;
 
 
 	}

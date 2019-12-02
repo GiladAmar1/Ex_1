@@ -1,7 +1,6 @@
 package myMath;
 
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -71,6 +70,14 @@ class MonomTest {
 		x.multipy(y);
 		assertEquals(12, x.get_coefficient());
 		assertEquals(4, x.get_power());
+		x.multipy(Monom.ZERO);
+		assertEquals(true,Monom.ZERO.equals(x));
+	}
+	
+	@Test
+	void testToString(){
+		Monom m=new Monom("5x^2");
+		assertEquals(true,new Monom(m.toString()).equals(m));
 	}
 
 }

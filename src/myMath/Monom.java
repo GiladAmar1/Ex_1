@@ -209,6 +209,11 @@ public class Monom implements function{
 		else 
 			throw new RuntimeException("ERR the string can't be monom");
 	}
+	
+	public boolean equals(Monom m) {
+		if(this._coefficient==m.get_coefficient()&&this._power==m.get_power())return true;
+		return false;
+	}
 
 	@Override
 	public function initFromString(String s) {
