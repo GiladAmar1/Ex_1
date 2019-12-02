@@ -58,7 +58,7 @@ public class Polynom implements Polynom_able{
 		}
 		return ans;	
 	}
-	
+
 	/**
 	 * Add p1 polynom to this polynom
 	 */
@@ -100,7 +100,7 @@ public class Polynom implements Polynom_able{
 		p.sort(comp);
 	}
 
-	
+
 	/**
 	 * Substract p1  from this polynom
 	 */
@@ -108,7 +108,7 @@ public class Polynom implements Polynom_able{
 	public void substract(Polynom_able p1) {
 		// TODO Auto-generated method stub
 		Monom t=new Monom(-1,0);
-		Polynom x=(Polynom) p1.copy();
+		Polynom_able x= p1.copy();
 		x.multiply(t);
 		this.add(x);
 	}
@@ -138,20 +138,16 @@ public class Polynom implements Polynom_able{
 	@Override
 	public boolean equals (Object p1){
 		// TODO Auto-generated method stub
-		Iterator<Monom> it= this.iteretor();
-		Iterator<Monom> it2= ((Polynom) p1).iteretor();
-		while(it.hasNext()&&it2.hasNext()) {
-			double sum=it.next().get_coefficient()-it2.next().get_coefficient();
-			if(Math.abs(sum)>=0.0000001) {
-				return false;
+		if (p1 instanceof Polynom || p1 instanceof Monom) {
+			Polynom_able x= this.copy();
+			x.substract((Polynom_able) p1);
+			if(x.isZero()) {
+				return true;
 			}
 		}
-		
-		
-			return true;
-		
+		return false;
 	}
-	
+
 	/**
 	 * Test if this polynom is the Zero Polynom
 	 */
@@ -176,7 +172,7 @@ public class Polynom implements Polynom_able{
 	@Override
 	public double root(double x0, double x1, double eps) {
 		// TODO Auto-generated method stub
-		
+
 		if (this.f(0)==0&&x0<=0&&x1>=0)
 			return 0;
 		if(this.f(x0)*this.f(x1)>=0) 
@@ -188,7 +184,7 @@ public class Polynom implements Polynom_able{
 			return root(mid,x1,eps);
 		return root (x0,mid,eps);
 	}
-	
+
 	/**
 	 * Create deep polynom of this polynom
 	 */
@@ -231,14 +227,18 @@ public class Polynom implements Polynom_able{
 	@Override
 	public double area(double x0, double x1, double eps) {
 		// TODO Auto-generated method stub
+
+		//		if (this.f(x1)<0)
+		//			return 0;
 		double ans=0;
-		for (double i = x0; i <= x1; i+=eps) {
+		for (double i = x0+eps; i <= x1; i+=eps) {
 			ans+=this.f(i)*eps;
 		}
-		 String ans2=String.format("%.5g%n", ans);
-		// System.out.println(Double.parseDouble(ans2));
-		return Double.parseDouble(ans2);
-		
+
+//		System.out.println(ans);
+		return Math.abs(ans);
+
+
 	}
 
 	/**
@@ -259,12 +259,20 @@ public class Polynom implements Polynom_able{
 		while(mu.hasNext())
 			mu.next().multipy(m1);
 	}
-	
+
 	/**
 	 * print this polynom
 	 */
 	public String toString() {
-		return this.p.toString();		
+		String ans="";
+		Iterator<Monom> it=this.iteretor();
+		while(it.hasNext()) {
+			Monom t=it.next();
+			if(t.get_coefficient()>0&&!ans.isEmpty())
+				ans+="+";
+			ans+=t.toString();
+		}
+		return ans;
 	}
 	@Override
 	public function initFromString(String s) {

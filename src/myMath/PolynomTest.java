@@ -75,6 +75,8 @@ class PolynomTest {
 		Polynom z=new Polynom("4X^2-3x^6-5x^4+3x+3");
 		x.substract(y);
 		assertEquals(true,x.equals(z));
+		x.substract(x);
+		assertEquals(new Polynom(), x);
 	}
 
 	@Test
@@ -90,7 +92,7 @@ class PolynomTest {
 	void testEqualsPolynom_able() {
 		Polynom x=new Polynom("2.99999999x^2+2+4x");
 		Polynom_able y=new Polynom("3x^2+4x+2");
-		System.out.println(x);
+		//System.out.println(x);
 		//System.out.println(x.equals(y));
 		assertEquals(true, x.equals(y));
 	}
@@ -129,7 +131,8 @@ class PolynomTest {
 	@Test
 	void testArea() {
 		Polynom x=new Polynom("6x+2.3");
-		assertEquals(16.6, x.area(0, 2, 0.000001));
+		double a= x.area(0, 2, 0.000001);
+		assertEquals(true, a-16.6<0.001);
 		//System.out.println(x.area(0, 1, 0.000001));
 	}
 
@@ -141,5 +144,19 @@ class PolynomTest {
 		x.multiply(y);
 		assertEquals(true,z.equals(x));
 	}
+	
+	@Test
+	void testToString() {
+		Polynom_able p1 = new Polynom();
+		String[] monoms1 = {"7", "-x^7","5.0000001x^2","4x^2","-1.5x^3"};
+		for(int i=0;i<monoms1.length;i++) {
+			Monom m = new Monom(monoms1[i]);
+			p1.add(m);
+		}
+		assertEquals(p1, new Polynom(p1.toString()));
+		assertEquals(p1, new Polynom("7+9x^2-1.5x^3-x^7"));
+		
+	}
+	
 
 }
