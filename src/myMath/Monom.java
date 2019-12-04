@@ -63,7 +63,7 @@ public class Monom implements function{
 	private void set_coefficient(double a){
 		this._coefficient = a;
 	}
-	
+
 	/**
 	 * Set power
 	 * @return power
@@ -92,13 +92,13 @@ public class Monom implements function{
 		ans = this.get_coefficient()*Math.pow(x, p);
 		return ans;
 	} 
-	
+
 	/**
 	 *
 	 * @return monom is 0
 	 */
 	public boolean isZero() {return this.get_coefficient() == 0;}
-	
+
 	// ***************** add your code below **********************
 
 	/**
@@ -118,7 +118,10 @@ public class Monom implements function{
 			}
 			else 
 				monoPositive(s);
+
+		this._coefficient=Double.parseDouble(String.format("%.5g%n", this.get_coefficient()));
 	}
+
 
 	/**
 	 * Add m monom with the same power to my monom
@@ -132,8 +135,9 @@ public class Monom implements function{
 		else if(this._power==m._power)
 			this._coefficient=this._coefficient+m._coefficient;
 		else throw new RuntimeException("ERR the power of Monom should be the saem");
+		this._coefficient=Double.parseDouble(String.format("%.5g%n", this.get_coefficient()));
 	}
-	
+
 	/**
 	 * Multiply d with my monom
 	 * @param d
@@ -156,8 +160,7 @@ public class Monom implements function{
 
 		if(this._power==0)
 			return this._coefficient+"";
-
-		String ans = this._coefficient+ "X^"+this._power;
+		String ans = this._coefficient+ "x^"+this._power;
 		return ans;
 
 	}
@@ -205,6 +208,11 @@ public class Monom implements function{
 		}
 		else 
 			throw new RuntimeException("ERR the string can't be monom");
+	}
+	
+	public boolean equals(Monom m) {
+		if(this._coefficient==m.get_coefficient()&&this._power==m.get_power())return true;
+		return false;
 	}
 
 	@Override
