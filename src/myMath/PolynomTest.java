@@ -90,7 +90,7 @@ class PolynomTest {
 	void testEqualsPolynom_able() {
 		Polynom x=new Polynom("2.99999999x^2+2+4x");
 		Polynom_able y=new Polynom("3x^2+4x+2");
-		System.out.println(x);
+		//System.out.println(x);
 		//System.out.println(x.equals(y));
 		assertEquals(true, x.equals(y));
 	}
