@@ -8,6 +8,7 @@ public class ComplexFunction implements complex_function {
 	private function right;
 	private Operation op;
 
+	
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
@@ -49,37 +50,51 @@ public class ComplexFunction implements complex_function {
 	//		this.left=x;
 	//
 	//	}
-	//	//Function for determining operation
-	//	private Operation getOpFromString(String op) {
-	//		if(op.equals("Plus")) {
-	//			return Operation.Plus;
-	//		}
-	//		if(op.equals("Times")) {
-	//			return Operation.Times;
-	//		}
-	//		if(op.equals("Divid")) {
-	//			return Operation.Divid;
-	//		}
-	//		if(op.equals("Max")) {
-	//			return Operation.Max;
-	//		}
-	//		if(op.equals("Min")) {
-	//			return Operation.Min;
-	//		}
-	//		if(op.equals("Comp")) {
-	//			return Operation.Comp;
-	//		}
-	//		return Operation.None;
-	//	}
+	//Function for determining operation
+	private Operation getOpFromString(String op) {
+		if(op.equals("Plus")||op.equals("plus")) {
+			return Operation.Plus;
+		}
+		if(op.equals("Times")||op.equals("times")||op.equals("mul")||op.equals("Mul")) {
+			return Operation.Times;
+		}
+		if(op.equals("Divid")||op.equals("div")) {
+			return Operation.Divid;
+		}
+		if(op.equals("Max")||op.equals("max")) {
+			return Operation.Max;
+		}
+		if(op.equals("Min")||op.equals("min")) {
+			return Operation.Min;
+		}
+		if(op.equals("Comp")||op.equals("comp")) {
+			return Operation.Comp;
+		}
+		return Operation.None;
+	}
 
 	@Override
 	public function initFromString(String s) {
-		for(int i=s.length();i>0;i--) {
-
+		if (s.indexOf('(')==-1) {
+			return new Polynom(s);
 		}
-
-		return null;
-
+		int i=0;
+		int nums=0;
+		while(s.charAt(i)!='(') {
+			i++;
+		}
+		nums++;
+		Operation op=getOpFromString(s.substring(0, i));
+		s=s.substring(i+1,s.length()-1);
+		i=0;
+		while(nums!=1||s.charAt(i+1)!=',') {
+			i++;
+			if(s.charAt(i)=='(')
+				nums++;
+			if(s.charAt(i)==')')
+				nums--;
+		}
+		return new ComplexFunction(initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())),op);
 	}
 
 	@Override
@@ -198,11 +213,11 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public double f(double x) {
 		// TODO Auto-generated method stub
-		
-		
+
+
 		double le=this.left.f(x);
 		double ri=this.right.f(x);
-		
+
 		if(this.op==Operation.None) {
 			return le;
 		}
@@ -226,10 +241,9 @@ public class ComplexFunction implements complex_function {
 		if(this.op==Operation.Times) {
 			return le*ri;
 		}
-		
-		
-			return 0;
+		return 0;
 	}
+
 	public String toString() {
 		return this.getOp()+"("+this.left()+","+this.right()+")";
 	}

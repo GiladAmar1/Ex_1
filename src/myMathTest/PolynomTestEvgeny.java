@@ -1,4 +1,9 @@
-package myMath;
+package myMathTest;
+
+import myMath.Monom;
+import myMath.Polynom;
+import myMath.Polynom_able;
+
 public class PolynomTestEvgeny {
 	static int fails = 0;
 	public static void main(String[] args) {
