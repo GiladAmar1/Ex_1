@@ -107,8 +107,8 @@ class PolynomTest {
 
 	@Test
 	void testRoot() {
-		Polynom x=new Polynom("6x+3");
-		assertEquals(-0.5000009536743164, x.root(-3, 0, 0.00001));
+		Polynom x=new Polynom("x^2-2x+1");
+		assertEquals(1, x.root(0, 3, 0.00001));
 		Polynom y=new Polynom("x^2-12x+35");
 		assertEquals(5, y.root(4,6,0.00001));
 		//System.out.println(y.root(4,6,0.00001));
