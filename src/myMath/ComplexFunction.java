@@ -8,7 +8,7 @@ public class ComplexFunction implements complex_function {
 	private function right;
 	private Operation op;
 
-	
+
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
@@ -21,6 +21,11 @@ public class ComplexFunction implements complex_function {
 		this.op=op;
 	}
 
+	public ComplexFunction(String s,function left,function right) {
+		this.left=left;
+		this.right=right;
+		this.op=getOpFromString(s);
+	}
 	//	public  ComplexFunction(String s) {
 	//		String run="";
 	//		int counter=0;
@@ -52,29 +57,36 @@ public class ComplexFunction implements complex_function {
 	//	}
 	//Function for determining operation
 	private Operation getOpFromString(String op) {
-		if(op.equals("Plus")||op.equals("plus")) {
+		op=op.toLowerCase();
+		if(op.equals("plus")) {
 			return Operation.Plus;
 		}
-		if(op.equals("Times")||op.equals("times")||op.equals("mul")||op.equals("Mul")) {
+		if(op.equals("times")||op.equals("mul")) {
 			return Operation.Times;
 		}
-		if(op.equals("Divid")||op.equals("div")) {
+		if(op.equals("divid")||op.equals("div")) {
 			return Operation.Divid;
 		}
-		if(op.equals("Max")||op.equals("max")) {
+		if(op.equals("max")) {
 			return Operation.Max;
 		}
-		if(op.equals("Min")||op.equals("min")) {
+		if(op.equals("min")) {
 			return Operation.Min;
 		}
-		if(op.equals("Comp")||op.equals("comp")) {
+		if(op.equals("comp")) {
 			return Operation.Comp;
 		}
-		return Operation.None;
+		if(op.equals("none")) {
+			return Operation.None;
+		}
+		return Operation.Error;
 	}
 
 	@Override
 	public function initFromString(String s) {
+		s=deleteSpace(s);
+		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
+			return new ComplexFunction(null, null, Operation.Error);
 		if (s.indexOf('(')==-1) {
 			return new Polynom(s);
 		}
@@ -94,7 +106,18 @@ public class ComplexFunction implements complex_function {
 			if(s.charAt(i)==')')
 				nums--;
 		}
+		if(s.indexOf("null")==s.length()-5)
+			return new ComplexFunction(initFromString(s.substring(0, i+1)),null,op);
 		return new ComplexFunction(initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())),op);
+	}
+	
+	private String deleteSpace(String s) {
+		String t = "";
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i)!=' ')
+				t+=s.charAt(i);
+		}
+		return t;
 	}
 
 	@Override
