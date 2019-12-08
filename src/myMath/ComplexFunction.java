@@ -1,12 +1,5 @@
 package myMath;
 
-import java.util.ArrayList;
-import java.util.TreeMap;
-
-import javax.swing.tree.TreeNode;
-
-import org.hamcrest.core.SubstringMatcher;
-
 public class ComplexFunction implements complex_function {
 
 	private function left;
