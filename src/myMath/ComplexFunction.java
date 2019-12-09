@@ -8,6 +8,7 @@ public class ComplexFunction implements complex_function {
 	private function right;
 	private Operation op;
 
+
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
@@ -20,6 +21,11 @@ public class ComplexFunction implements complex_function {
 		this.op=op;
 	}
 
+	public ComplexFunction(String s,function left,function right) {
+		this.left=left;
+		this.right=right;
+		this.op=getOpFromString(s);
+	}
 	//	public  ComplexFunction(String s) {
 	//		String run="";
 	//		int counter=0;
@@ -49,37 +55,69 @@ public class ComplexFunction implements complex_function {
 	//		this.left=x;
 	//
 	//	}
-	//	//Function for determining operation
-	//	private Operation getOpFromString(String op) {
-	//		if(op.equals("Plus")) {
-	//			return Operation.Plus;
-	//		}
-	//		if(op.equals("Times")) {
-	//			return Operation.Times;
-	//		}
-	//		if(op.equals("Divid")) {
-	//			return Operation.Divid;
-	//		}
-	//		if(op.equals("Max")) {
-	//			return Operation.Max;
-	//		}
-	//		if(op.equals("Min")) {
-	//			return Operation.Min;
-	//		}
-	//		if(op.equals("Comp")) {
-	//			return Operation.Comp;
-	//		}
-	//		return Operation.None;
-	//	}
+	//Function for determining operation
+	private Operation getOpFromString(String op) {
+		op=op.toLowerCase();
+		if(op.equals("plus")) {
+			return Operation.Plus;
+		}
+		if(op.equals("times")||op.equals("mul")) {
+			return Operation.Times;
+		}
+		if(op.equals("divid")||op.equals("div")) {
+			return Operation.Divid;
+		}
+		if(op.equals("max")) {
+			return Operation.Max;
+		}
+		if(op.equals("min")) {
+			return Operation.Min;
+		}
+		if(op.equals("comp")) {
+			return Operation.Comp;
+		}
+		if(op.equals("none")) {
+			return Operation.None;
+		}
+		return Operation.Error;
+	}
 
 	@Override
 	public function initFromString(String s) {
-		for(int i=s.length();i>0;i--) {
-
+		s=deleteSpace(s);
+		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
+			return new ComplexFunction(null, null, Operation.Error);
+		if (s.indexOf('(')==-1) {
+			return new Polynom(s);
 		}
-
-		return null;
-
+		int i=0;
+		int nums=0;
+		while(s.charAt(i)!='(') {
+			i++;
+		}
+		nums++;
+		Operation op=getOpFromString(s.substring(0, i));
+		s=s.substring(i+1,s.length()-1);
+		i=0;
+		while(nums!=1||s.charAt(i+1)!=',') {
+			i++;
+			if(s.charAt(i)=='(')
+				nums++;
+			if(s.charAt(i)==')')
+				nums--;
+		}
+		if(s.indexOf("null")==s.length()-5)
+			return new ComplexFunction(initFromString(s.substring(0, i+1)),null,op);
+		return new ComplexFunction(initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())),op);
+	}
+	
+	private String deleteSpace(String s) {
+		String t = "";
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i)!=' ')
+				t+=s.charAt(i);
+		}
+		return t;
 	}
 
 	@Override
@@ -198,11 +236,11 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public double f(double x) {
 		// TODO Auto-generated method stub
-		
-		
+
+
 		double le=this.left.f(x);
 		double ri=this.right.f(x);
-		
+
 		if(this.op==Operation.None) {
 			return le;
 		}
@@ -226,10 +264,9 @@ public class ComplexFunction implements complex_function {
 		if(this.op==Operation.Times) {
 			return le*ri;
 		}
-		
-		
-			return 0;
+		return 0;
 	}
+
 	public String toString() {
 		return this.getOp()+"("+this.left()+","+this.right()+")";
 	}

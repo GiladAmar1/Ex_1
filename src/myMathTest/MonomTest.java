@@ -1,9 +1,11 @@
-package myMath;
+package myMathTest;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import myMath.Monom;
 
 class MonomTest {
 
