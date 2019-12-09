@@ -30,8 +30,8 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 2	 */
 	public Polynom(String s) {
-	
-		int i=0;
+		s=deleteSpace(s);
+				int i=0;
 		while(s.length()-1!=i) {
 			i++;
 			if(s.charAt(i)=='+'||s.charAt(i)=='-') {
@@ -46,7 +46,15 @@ public class Polynom implements Polynom_able{
 	}
 
 
-	
+	private String deleteSpace(String s) {
+		String t = "";
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i)!=' ')
+				t+=s.charAt(i);
+		}
+		return t;
+	}
+
 	/**
 	 * The function get value and solve this polynom with this value
 	 */
