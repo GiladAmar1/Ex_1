@@ -1,4 +1,4 @@
-package myMath;
+package MyMath;
 
 import java.util.Comparator;
 

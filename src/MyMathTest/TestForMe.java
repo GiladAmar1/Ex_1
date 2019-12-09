@@ -1,9 +1,9 @@
-package myMathTest;
+package MyMathTest;
 
-import myMath.ComplexFunction;
-import myMath.Polynom;
-import myMath.complex_function;
-import myMath.function;
+import MyMath.ComplexFunction;
+import MyMath.Polynom;
+import MyMath.complex_function;
+import MyMath.function;
 
 public class TestForMe {
 

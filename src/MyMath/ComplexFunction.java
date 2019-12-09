@@ -1,4 +1,4 @@
-package myMath;
+package MyMath;
 
 
 
@@ -15,7 +15,7 @@ public class ComplexFunction implements complex_function {
 		this.op=Operation.None;
 	}
 
-	public ComplexFunction(function left,function right, Operation op) {
+	public ComplexFunction( Operation op, function left,function right) {
 		this.left=left;
 		this.right=right;
 		this.op=op;
@@ -86,7 +86,7 @@ public class ComplexFunction implements complex_function {
 	public function initFromString(String s) {
 		s=deleteSpace(s);
 		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
-			return new ComplexFunction(null, null, Operation.Error);
+			return new ComplexFunction( Operation.Error,null, null);
 		if (s.indexOf('(')==-1) {
 			return new Polynom(s);
 		}
@@ -107,8 +107,8 @@ public class ComplexFunction implements complex_function {
 				nums--;
 		}
 		if(s.indexOf("null")==s.length()-5)
-			return new ComplexFunction(initFromString(s.substring(0, i+1)),null,op);
-		return new ComplexFunction(initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())),op);
+			return new ComplexFunction(op,initFromString(s.substring(0, i+1)),null);
+		return new ComplexFunction(op,initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())));
 	}
 	
 	private String deleteSpace(String s) {
@@ -122,7 +122,7 @@ public class ComplexFunction implements complex_function {
 
 	@Override
 	public function copy() {
-		function co=new ComplexFunction(left(),right(),getOp());
+		function co=new ComplexFunction(getOp(), left(),right());
 		return co;
 	}
 
@@ -134,7 +134,7 @@ public class ComplexFunction implements complex_function {
 			this.op=Operation.Plus;
 		}
 		else {
-			this.left=new ComplexFunction(left(),right(),getOp());
+			this.left=new ComplexFunction(getOp(), left(),right());
 			this.right=f1;
 			this.op=Operation.Plus;
 		}
@@ -149,7 +149,8 @@ public class ComplexFunction implements complex_function {
 			this.op=Operation.Times;
 		}
 		else {
-			this.left=new ComplexFunction(left(),right(),getOp());
+			this.left=new ComplexFunction(getOp(), left(),right());
+;
 			this.right=f1;
 			this.op=Operation.Times;
 		}
@@ -164,7 +165,7 @@ public class ComplexFunction implements complex_function {
 			this.op=Operation.Divid;
 		}
 		else {
-			this.left=new ComplexFunction(left(),right(),getOp());
+			this.left=new ComplexFunction(getOp(), left(),right());
 			this.right=f1;
 			this.op=Operation.Divid;
 		}
@@ -180,7 +181,7 @@ public class ComplexFunction implements complex_function {
 			this.op=Operation.Max;
 		}
 		else {
-			this.left=new ComplexFunction(left(),right(),getOp());
+			this.left=new ComplexFunction(getOp(), left(),right());
 			this.right=f1;
 			this.op=Operation.Max;
 		}
@@ -195,7 +196,7 @@ public class ComplexFunction implements complex_function {
 			this.op=Operation.Min;
 		}
 		else {
-			this.left=new ComplexFunction(left(),right(),getOp());
+			this.left=new ComplexFunction(getOp(), left(),right());
 			this.right=f1;
 			this.op=Operation.Min;
 		}
@@ -209,7 +210,7 @@ public class ComplexFunction implements complex_function {
 			this.op=Operation.Comp;
 		}
 		else {
-			this.left=new ComplexFunction(left(),right(),getOp());
+			this.left=new ComplexFunction(getOp(), left(),right());
 			this.right=f1;
 			this.op=Operation.Comp;
 		}

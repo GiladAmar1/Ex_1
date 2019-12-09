@@ -1,5 +1,5 @@
 
-package myMath;
+package MyMath;
 
 import java.util.Comparator;
 
@@ -226,8 +226,6 @@ public class Monom implements function{
 		// TODO Auto-generated method stub
 		return new Monom(this);
 	}
-
-
 
 
 }

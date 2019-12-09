@@ -1,10 +1,9 @@
-package myMath;
+package MyMath;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-
-import myMath.Monom;
+import MyMath.Monom;
 
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:
@@ -31,6 +30,7 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 2	 */
 	public Polynom(String s) {
+	
 		int i=0;
 		while(s.length()-1!=i) {
 			i++;
@@ -44,6 +44,9 @@ public class Polynom implements Polynom_able{
 		p.sort(comp);
 
 	}
+
+
+	
 	/**
 	 * The function get value and solve this polynom with this value
 	 */
