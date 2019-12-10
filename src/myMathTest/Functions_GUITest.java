@@ -1,18 +1,18 @@
-package myMathTest;
+package MyMathTest;
 
 import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import myMath.ComplexFunction;
-import myMath.Functions_GUI;
-import myMath.Monom;
-import myMath.Operation;
-import myMath.Polynom;
-import myMath.Range;
-import myMath.function;
-import myMath.functions;
+import MyMath.ComplexFunction;
+import MyMath.Functions_GUI;
+import MyMath.Monom;
+import MyMath.Operation;
+import MyMath.Polynom;
+import MyMath.Range;
+import MyMath.function;
+import MyMath.functions;
 /**
  * Note: minor changes (thanks to Amichai!!)
  * The use of "get" was replaced by iterator!
@@ -32,10 +32,10 @@ import myMath.functions;
 class Functions_GUITest {
 	public static void main(String[] a) {
 		functions data = FunctionsFactory();
-//			int w=1000, h=600, res=200;
-//			Range rx = new Range(-10,10);
-//			Range ry = new Range(-5,15);
-//				data.drawFunctions(w,h,rx,ry,res);
+		//	int w=1000, h=600, res=200;
+		//	Range rx = new Range(-10,10);
+		//	Range ry = new Range(-5,15);
+		//		data.drawFunctions(w,h,rx,ry,res);
 		String file = "function_file.txt";
 		String file2 = "function_file2.txt";
 		try {
@@ -47,7 +47,7 @@ class Functions_GUITest {
 		catch(Exception e) {e.printStackTrace();}
 
 		String JSON_param_file = "GUI_params.txt";
-		data.drawFunctions(file);
+		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
 	//	@BeforeAll
@@ -82,11 +82,10 @@ class Functions_GUITest {
 	}
 
 	//	@Test
-		void testDrawFunctionsIntIntRangeRangeInt() {
-			_data.drawFunctions("GUI_params.txt");
+	//	void testDrawFunctionsIntIntRangeRangeInt() {
+	//		_data.drawFunctions("GUI_params.txt");
 	//fail("Not yet implemented");
-	
-		}
+	//	}
 	public static functions FunctionsFactory() {
 		functions ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";
@@ -125,7 +124,6 @@ class Functions_GUITest {
 		}
 		ans.add(max);
 		ans.add(min);		
-		
 		return ans;
 	}
 }

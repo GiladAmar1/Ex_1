@@ -1,4 +1,4 @@
-package myMathTest;
+package MyMathTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,9 +6,9 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
-import myMath.Monom;
-import myMath.Polynom;
-import myMath.Polynom_able;
+import MyMath.Monom;
+import MyMath.Polynom;
+import MyMath.Polynom_able;
 class PolynomTest {
 
 	@Test
