@@ -1,5 +1,6 @@
 package myMath;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,11 +14,11 @@ import com.google.gson.Gson;
 
 public class Functions_GUI implements functions {
 
-	private ArrayList<function> a=new ArrayList<function>();
-	
+	private ArrayList<function> a;
+
 	public  Functions_GUI() {
 		// TODO Auto-generated constructor stub
-		this.a=null;
+		this.a=new ArrayList<function>();;
 	}
 
 	@Override
@@ -60,12 +61,14 @@ public class Functions_GUI implements functions {
 	public boolean add(function e) {
 		// TODO Auto-generated method stub
 		return a.add(e);
+
 	}
 
 	@Override
 	public boolean remove(Object o) {
 		// TODO Auto-generated method stub
 		return a.remove(o);
+
 	}
 
 	@Override
@@ -105,8 +108,9 @@ public class Functions_GUI implements functions {
 		try 
 		{
 			FileReader reader = new FileReader(file);
-			Functions_GUI f= gson.fromJson(reader,Functions_GUI.class);
-//			System.out.println(f);
+			a= gson.fromJson(reader,ArrayList.class);
+			System.out.println(a);
+
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -118,7 +122,7 @@ public class Functions_GUI implements functions {
 		// TODO Auto-generated method stub
 		Gson gson = new Gson();
 		String json = gson.toJson(a);
-		System.out.println(json);
+		//		System.out.println(json);
 		try 
 		{
 			PrintWriter pw = new PrintWriter(new File(file));
@@ -135,18 +139,42 @@ public class Functions_GUI implements functions {
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
 		// TODO Auto-generated method stub
-		
 		StdDraw.setCanvasSize(width,height);
-		
-		
+		StdDraw.setXscale(rx.get_min(), rx.get_max());
+		StdDraw.setYscale(ry.get_min(), ry.get_max());
+		StdDraw.setPenRadius(0.009);
+		double rx_steps =(rx.get_max()-rx.get_min())/resolution;
+		for (int i = 0; i < this.size(); i++) {
+			StdDraw.setPenColor(Colors[i%7]);
+			for (double j = rx.get_min(); j <rx.get_max(); j+=rx_steps) {
+				double y=a.get(i).f(j);
+				if(y<ry.get_max()&&y>ry.get_min()) {
+					StdDraw.point(j, y);
+				}
+			}
+
+		}	
 	}
 
+	public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE, Color.red, Color.GREEN, Color.PINK};
 	@Override
 	public void drawFunctions(String json_file) {
 		// TODO Auto-generated method stub
-		
+
+		try {
+			initFromFile(json_file);
+			StdDraw.setCanvasSize();
+			StdDraw.setYscale();
+			StdDraw.setXscale();
+			drawFunctions(512, 512,new Range(-10, 10),new Range(-5,15) , 500);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+
 	}
 
-	
+
 
 }
