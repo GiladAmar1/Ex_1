@@ -8,7 +8,11 @@ public class ComplexFunction implements complex_function {
 	private function right;
 	private Operation op;
 
-
+public ComplexFunction() {
+	this.left=null;
+	this.right=null;
+	this.op=Operation.None;
+}
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
