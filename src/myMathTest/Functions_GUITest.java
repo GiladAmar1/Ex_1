@@ -1,18 +1,18 @@
-package MyMathTest;
+package myMathTest;
 
 import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import MyMath.ComplexFunction;
-import MyMath.Functions_GUI;
-import MyMath.Monom;
-import MyMath.Operation;
-import MyMath.Polynom;
-import MyMath.Range;
-import MyMath.function;
-import MyMath.functions;
+import myMath.ComplexFunction;
+import myMath.Functions_GUI;
+import myMath.Monom;
+import myMath.Operation;
+import myMath.Polynom;
+import myMath.Range;
+import myMath.function;
+import myMath.functions;
 /**
  * Note: minor changes (thanks to Amichai!!)
  * The use of "get" was replaced by iterator!

@@ -1,4 +1,4 @@
-package MyMath;
+package myMath;
 
 import java.io.Serializable;
 

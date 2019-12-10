@@ -1,8 +1,8 @@
-package MyMathTest;
+package myMathTest;
 
-import MyMath.Monom;
-import MyMath.Polynom;
-import MyMath.Polynom_able;
+import myMath.Monom;
+import myMath.Polynom;
+import myMath.Polynom_able;
 
 public class PolynomTestEvgeny {
 	static int fails = 0;

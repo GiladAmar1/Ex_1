@@ -1,9 +1,9 @@
-package MyMath;
+package myMath;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import MyMath.Monom;
+import myMath.Monom;
 
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:

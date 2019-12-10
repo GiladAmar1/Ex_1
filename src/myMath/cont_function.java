@@ -1,4 +1,4 @@
-package MyMath;
+package myMath;
 
 /**
  * The interface represents a continuance function 

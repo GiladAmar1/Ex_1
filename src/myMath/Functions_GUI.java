@@ -1,4 +1,4 @@
-package MyMath;
+package myMath;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -106,7 +106,6 @@ public class Functions_GUI implements functions {
 		{
 			FileReader reader = new FileReader(file);
 			Functions_GUI f= gson.fromJson(reader,Functions_GUI.class);
-			this.a=f.a;
 //			System.out.println(f);
 		} 
 		catch (FileNotFoundException e) {
