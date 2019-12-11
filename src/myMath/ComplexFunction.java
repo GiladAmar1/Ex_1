@@ -1,6 +1,6 @@
-package myMath;
+package MyMath;
 
-
+import javax.management.RuntimeErrorException;
 
 public class ComplexFunction implements complex_function {
 
@@ -9,11 +9,11 @@ public class ComplexFunction implements complex_function {
 	private Operation op;
 	private String type="ComplexFunction";
 
-	public ComplexFunction() {
-		this.left=null;
-		this.right=null;
-		this.op=Operation.None;
-	}
+public ComplexFunction() {
+	this.left=null;
+	this.right=null;
+	this.op=Operation.None;
+}
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
@@ -81,19 +81,17 @@ public class ComplexFunction implements complex_function {
 		if(op.equals("comp")) {
 			return Operation.Comp;
 		}
-		if(!op.equals("none")) {
-			throw new RuntimeException("not operator");
+		if(op.equals("none")) {
+			return Operation.None;
 		}
-
-		return Operation.None;
-
+		return Operation.Error;
 	}
 
 	@Override
 	public function initFromString(String s) {
 		s=deleteSpace(s);
 		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
-			throw new RuntimeException("error");
+			return new ComplexFunction( Operation.Error,null, null);
 		if (s.indexOf('(')==-1) {
 			return new Polynom(s);
 		}
@@ -117,7 +115,7 @@ public class ComplexFunction implements complex_function {
 			return new ComplexFunction(op,initFromString(s.substring(0, i+1)),null);
 		return new ComplexFunction(op,initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())));
 	}
-
+	
 	private String deleteSpace(String s) {
 		String t = "";
 		for (int i = 0; i < s.length(); i++) {
@@ -157,7 +155,7 @@ public class ComplexFunction implements complex_function {
 		}
 		else {
 			this.left=new ComplexFunction(getOp(), left(),right());
-			;
+;
 			this.right=f1;
 			this.op=Operation.Times;
 		}
@@ -224,6 +222,7 @@ public class ComplexFunction implements complex_function {
 
 	}
 
+
 	@Override
 	public function left() {	
 		return this.left;
@@ -243,8 +242,6 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public double f(double x) {
 		// TODO Auto-generated method stub
-
-
 		double le=this.left.f(x);
 		double ri=this.right.f(x);
 
@@ -253,8 +250,12 @@ public class ComplexFunction implements complex_function {
 		}
 		if(this.op==Operation.Comp)
 			return this.left.f(ri);
-		if(this.op==Operation.Divid)
+		if(this.op==Operation.Divid) {
+			if(ri==0) {
+				throw new RuntimeException("Dont divid 0");
+			}
 			return le/ri;
+		}
 		if(this.op==Operation.Max) {
 			if(le>ri)
 				return le;
