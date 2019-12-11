@@ -1,14 +1,14 @@
-package MyMathTest;
+package myMathTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.experimental.max.MaxCore;
 import org.junit.jupiter.api.Test;
 
-import MyMath.ComplexFunction;
-import MyMath.Operation;
-import MyMath.Polynom;
-import MyMath.function;
+import myMath.ComplexFunction;
+import myMath.Operation;
+import myMath.Polynom;
+import myMath.function;
 
 class ComplexFunctionTest {
 
