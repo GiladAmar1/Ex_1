@@ -7,6 +7,7 @@ public class ComplexFunction implements complex_function {
 	private function left;
 	private function right;
 	private Operation op;
+	private String type="ComplexFunction";
 
 	public ComplexFunction() {
 		this.left=null;

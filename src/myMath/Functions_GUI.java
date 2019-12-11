@@ -1,6 +1,7 @@
 package myMath;
 
 import java.awt.Color;
+import java.awt.Label;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +15,9 @@ import java.util.Iterator;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 
 
@@ -114,39 +118,53 @@ public class Functions_GUI implements functions {
 	@Override
 	public void initFromFile(String file) throws IOException {
 		// TODO Auto-generated method stub
-		//		Gson gson = new Gson();
-		//
-		//		try 
-		//		{
-		//			FileReader reader = new FileReader(file);
-		//			cl= gson.fromJson(reader,ArrayList.class);
-		////			System.out.println(cl.get(1).toString());
-		//		} 
-		//		catch (FileNotFoundException e) {
-		//			e.printStackTrace();
-		//		}
-		cl=TempJson.tempInitFromFile(file);
+		Gson gson = new Gson();
+		try 
+		{
+			FileReader reader = new FileReader(file);
+
+
+			final TypeToken<ArrayList<function>> requestListTypeToken = new TypeToken<ArrayList<function>>() {};
+
+			//			
+			final RuntimeTypeAdapterFactory<function> typeFactory = RuntimeTypeAdapterFactory
+					.of(function.class, "type") 
+					.registerSubtype(ComplexFunction.class) 
+					.registerSubtype(Monom.class)
+					.registerSubtype(Polynom.class);
+
+
+			final Gson gson2 = new GsonBuilder().registerTypeAdapterFactory(typeFactory).create();
+
+			final ArrayList<function> result = gson2.fromJson(reader, requestListTypeToken.getType() );
+			this.cl=result;
+			System.out.println(cl);
+
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void saveToFile(String file) throws IOException {
-		//		// TODO Auto-generated method stub
-		//		Gson gson = new Gson();
-		//		String json = gson.toJson(cl);
-		////		System.out.println(json);
-		//		try 
-		//		{
-		//			PrintWriter pw = new PrintWriter(new File(file));
-		//			pw.write(json);
-		//			pw.close();
-		//		} 
-		//		catch (FileNotFoundException e) 
-		//		{
-		//			e.printStackTrace();
-		//			return;
-		//		}
-		
-		TempJson.saveToFile(file, this.cl);
+		// TODO Auto-generated method stub
+		Gson gson = new Gson();
+		String json = gson.toJson(new ArrayList<function>(cl));
+		//		System.out.println(json);
+		try 
+		{
+			PrintWriter pw = new PrintWriter(new File(file));
+			pw.write(json);
+			pw.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+			return;
+		}
+
+
 
 
 	}
@@ -206,18 +224,21 @@ public class Functions_GUI implements functions {
 			StdDraw.setCanvasSize();
 			StdDraw.setYscale();
 			StdDraw.setXscale();
-			drawFunctions(512, 512,new Range(0, 1),new Range(0,1) , 500);
+			drawFunctions(512, 512,new Range(0, 1),new Range(0,1) , 200);
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 
 	}
-	public ArrayList<function> getCl() {
-		return this.cl;
+	public String toString() {
+		String ans="";
+		for (int i = 0; i < cl.size(); i++) {
+			ans+=cl.get(i).toString();
+		}
+		return ans;
 
 	}
-
 
 
 

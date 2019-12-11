@@ -15,6 +15,7 @@ public class Monom implements function{
 	private static Monom getNewZeroMonom() {return new Monom(ZERO);}
 	private double _coefficient; 
 	private int _power;
+	private String type="Monom";
 
 
 	public static final Monom ZERO = new Monom(0,0);
