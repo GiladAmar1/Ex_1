@@ -1,6 +1,7 @@
 package myMath;
 
 import java.awt.Color;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,95 +11,97 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+
 import com.google.gson.Gson;
+
 
 public class Functions_GUI implements functions {
 
-	private ArrayList<function> a;
+	private ArrayList<function> cl;
 
 	public  Functions_GUI() {
 		// TODO Auto-generated constructor stub
-		this.a=new ArrayList<function>();;
+		this.cl=new ArrayList<function>();;
 	}
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return a.size();
+		return cl.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return a.isEmpty();
+		return cl.isEmpty();
 	}
 
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
-		return a.contains(o);
+		return cl.contains(o);
 	}
 
 	@Override
 	public Iterator<function> iterator() {
 		// TODO Auto-generated method stub
-		return a.iterator();
+		return cl.iterator();
 	}
 
 	@Override
 	public Object[] toArray() {
 		// TODO Auto-generated method stub
-		return a.toArray();
+		return cl.toArray();
 	}
 
 	@Override
-	public <T> T[] toArray(T[] a) {
+	public  <T> T[] toArray(T[] a) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.toArray(a) ;
 	}
 
 	@Override
 	public boolean add(function e) {
 		// TODO Auto-generated method stub
-		return a.add(e);
+		return cl.add(e);
 
 	}
 
 	@Override
 	public boolean remove(Object o) {
 		// TODO Auto-generated method stub
-		return a.remove(o);
+		return cl.remove(o);
 
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return a.containsAll(c);
+		return cl.containsAll(c);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends function> c) {
 		// TODO Auto-generated method stub
-		return a.addAll(c);
+		return cl.addAll(c);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return a.removeAll(c);
+		return cl.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return a.retainAll(c);
+		return cl.retainAll(c);
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		a.clear();
+		cl.clear();
 	}
 
 	@Override
@@ -108,8 +111,8 @@ public class Functions_GUI implements functions {
 		try 
 		{
 			FileReader reader = new FileReader(file);
-			a= gson.fromJson(reader,ArrayList.class);
-			System.out.println(a);
+			cl= gson.fromJson(reader,ArrayList.class);
+			System.out.println(cl);
 
 		} 
 		catch (FileNotFoundException e) {
@@ -121,7 +124,7 @@ public class Functions_GUI implements functions {
 	public void saveToFile(String file) throws IOException {
 		// TODO Auto-generated method stub
 		Gson gson = new Gson();
-		String json = gson.toJson(a);
+		String json = gson.toJson(cl);
 		//		System.out.println(json);
 		try 
 		{
@@ -142,15 +145,16 @@ public class Functions_GUI implements functions {
 		StdDraw.setCanvasSize(width,height);
 		StdDraw.setXscale(rx.get_min(), rx.get_max());
 		StdDraw.setYscale(ry.get_min(), ry.get_max());
-		StdDraw.setPenRadius(0.009);
+		StdDraw.line(rx.get_min(), 0, rx.get_max(), 0);
+		StdDraw.line(0,ry.get_min(), 0, ry.get_max());
 		double rx_steps =(rx.get_max()-rx.get_min())/resolution;
 		for (int i = 0; i < this.size(); i++) {
 			StdDraw.setPenColor(Colors[i%7]);
 			for (double j = rx.get_min(); j <rx.get_max(); j+=rx_steps) {
-				double y=a.get(i).f(j);
-				if(y<ry.get_max()&&y>ry.get_min()) {
-					StdDraw.point(j, y);
-				}
+				double y=cl.get(i).f(j);
+				double y2=cl.get(i).f(j+rx_steps);
+				StdDraw.line(j,y, j+rx_steps, y2);
+
 			}
 
 		}	
@@ -166,7 +170,7 @@ public class Functions_GUI implements functions {
 			StdDraw.setCanvasSize();
 			StdDraw.setYscale();
 			StdDraw.setXscale();
-			drawFunctions(512, 512,new Range(-10, 10),new Range(-5,15) , 500);
+			drawFunctions(512, 512,new Range(0, 1),new Range(0,1) , 500);
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -174,6 +178,8 @@ public class Functions_GUI implements functions {
 
 
 	}
+
+
 
 
 

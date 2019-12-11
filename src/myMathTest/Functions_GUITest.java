@@ -1,20 +1,20 @@
-package MyMathTest;
+package myMathTest;
 
 import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import MyMath.ComplexFunction;
-import MyMath.Functions_GUI;
-import MyMath.Monom;
-import MyMath.Operation;
-import MyMath.Polynom;
-import MyMath.Range;
-import MyMath.function;
-import MyMath.functions;
+import myMath.ComplexFunction;
+import myMath.Functions_GUI;
+import myMath.Monom;
+import myMath.Operation;
+import myMath.Polynom;
+import myMath.Range;
+import myMath.function;
+import myMath.functions;
 /**
- * Note: minor changes (thanks to Amichai!!)
+ * Note: minor changes (thanks to Amichai!!) 
  * The use of "get" was replaced by iterator!
  * 
  * Partial JUnit + main test for the GUI_Functions class, expected output from the main:
@@ -32,10 +32,10 @@ import MyMath.functions;
 class Functions_GUITest {
 	public static void main(String[] a) {
 		functions data = FunctionsFactory();
-		//	int w=1000, h=600, res=200;
-		//	Range rx = new Range(-10,10);
-		//	Range ry = new Range(-5,15);
-		//		data.drawFunctions(w,h,rx,ry,res);
+				int w=1000, h=600, res=200;
+				Range rx = new Range(-10,10);
+				Range ry = new Range(-5,15);
+				data.drawFunctions(w,h,rx,ry,res);
 		String file = "function_file.txt";
 		String file2 = "function_file2.txt";
 		try {
@@ -47,7 +47,7 @@ class Functions_GUITest {
 		catch(Exception e) {e.printStackTrace();}
 
 		String JSON_param_file = "GUI_params.txt";
-		data.drawFunctions(JSON_param_file);
+//		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
 	//	@BeforeAll
