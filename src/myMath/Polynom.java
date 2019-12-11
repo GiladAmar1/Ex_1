@@ -3,7 +3,6 @@ package myMath;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-
 import myMath.Monom;
 
 /**
@@ -16,7 +15,7 @@ import myMath.Monom;
  *
  */
 public class Polynom implements Polynom_able{
-	private Monom_Comperator comp=new Monom_Comperator();
+	private   Monom_Comperator comp=new Monom_Comperator();
 	private  LinkedList<Monom> p=  new LinkedList<>();
 
 	/**
@@ -31,7 +30,8 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 2	 */
 	public Polynom(String s) {
-		int i=0;
+		s=deleteSpace(s);
+				int i=0;
 		while(s.length()-1!=i) {
 			i++;
 			if(s.charAt(i)=='+'||s.charAt(i)=='-') {
@@ -44,6 +44,17 @@ public class Polynom implements Polynom_able{
 		p.sort(comp);
 
 	}
+
+
+	private String deleteSpace(String s) {
+		String t = "";
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i)!=' ')
+				t+=s.charAt(i);
+		}
+		return t;
+	}
+
 	/**
 	 * The function get value and solve this polynom with this value
 	 */

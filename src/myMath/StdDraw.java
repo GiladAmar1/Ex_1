@@ -989,6 +989,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		double r = penRadius;
 		float scaledPenRadius = (float) (r * DEFAULT_SIZE);
 
+		
 		// double ws = factorX(2*r);
 		// double hs = factorY(2*r);
 		// if (ws <= 1 && hs <= 1) pixel(x, y);
