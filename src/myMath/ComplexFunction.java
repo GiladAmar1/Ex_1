@@ -8,11 +8,11 @@ public class ComplexFunction implements complex_function {
 	private function right;
 	private Operation op;
 
-public ComplexFunction() {
-	this.left=null;
-	this.right=null;
-	this.op=Operation.None;
-}
+	public ComplexFunction() {
+		this.left=null;
+		this.right=null;
+		this.op=Operation.None;
+	}
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
@@ -80,17 +80,19 @@ public ComplexFunction() {
 		if(op.equals("comp")) {
 			return Operation.Comp;
 		}
-		if(op.equals("none")) {
-			return Operation.None;
+		if(!op.equals("none")) {
+			throw new RuntimeException("not operator");
 		}
-		return Operation.Error;
+
+		return Operation.None;
+
 	}
 
 	@Override
 	public function initFromString(String s) {
 		s=deleteSpace(s);
 		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
-			return new ComplexFunction( Operation.Error,null, null);
+			throw new RuntimeException("error");
 		if (s.indexOf('(')==-1) {
 			return new Polynom(s);
 		}
@@ -114,7 +116,7 @@ public ComplexFunction() {
 			return new ComplexFunction(op,initFromString(s.substring(0, i+1)),null);
 		return new ComplexFunction(op,initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())));
 	}
-	
+
 	private String deleteSpace(String s) {
 		String t = "";
 		for (int i = 0; i < s.length(); i++) {
@@ -154,7 +156,7 @@ public ComplexFunction() {
 		}
 		else {
 			this.left=new ComplexFunction(getOp(), left(),right());
-;
+			;
 			this.right=f1;
 			this.op=Operation.Times;
 		}
@@ -220,7 +222,6 @@ public ComplexFunction() {
 		}
 
 	}
-
 
 	@Override
 	public function left() {	

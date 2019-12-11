@@ -15,7 +15,7 @@ import myMath.Monom;
  *
  */
 public class Polynom implements Polynom_able{
-	private Monom_Comperator comp=new Monom_Comperator();
+	private   Monom_Comperator comp=new Monom_Comperator();
 	private  LinkedList<Monom> p=  new LinkedList<>();
 
 	/**

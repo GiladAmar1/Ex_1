@@ -1,7 +1,7 @@
 package myMath;
 
 import java.awt.Color;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,7 +12,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
+
 import com.google.gson.Gson;
+
 
 
 public class Functions_GUI implements functions {
@@ -21,7 +23,11 @@ public class Functions_GUI implements functions {
 
 	public  Functions_GUI() {
 		// TODO Auto-generated constructor stub
-		this.cl=new ArrayList<function>();;
+		this.cl=new ArrayList<function>();
+	}
+	public  Functions_GUI(ArrayList<function> arr) {
+		// TODO Auto-generated constructor stub
+		this.cl=arr;
 	}
 
 	@Override
@@ -65,6 +71,7 @@ public class Functions_GUI implements functions {
 		// TODO Auto-generated method stub
 		return cl.add(e);
 
+
 	}
 
 	@Override
@@ -107,36 +114,41 @@ public class Functions_GUI implements functions {
 	@Override
 	public void initFromFile(String file) throws IOException {
 		// TODO Auto-generated method stub
-		Gson gson = new Gson();
-		try 
-		{
-			FileReader reader = new FileReader(file);
-			cl= gson.fromJson(reader,ArrayList.class);
-			System.out.println(cl);
-
-		} 
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		//		Gson gson = new Gson();
+		//
+		//		try 
+		//		{
+		//			FileReader reader = new FileReader(file);
+		//			cl= gson.fromJson(reader,ArrayList.class);
+		////			System.out.println(cl.get(1).toString());
+		//		} 
+		//		catch (FileNotFoundException e) {
+		//			e.printStackTrace();
+		//		}
+		cl=TempJson.tempInitFromFile(file);
 	}
 
 	@Override
 	public void saveToFile(String file) throws IOException {
-		// TODO Auto-generated method stub
-		Gson gson = new Gson();
-		String json = gson.toJson(cl);
-		//		System.out.println(json);
-		try 
-		{
-			PrintWriter pw = new PrintWriter(new File(file));
-			pw.write(json);
-			pw.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-			return;
-		}
+		//		// TODO Auto-generated method stub
+		//		Gson gson = new Gson();
+		//		String json = gson.toJson(cl);
+		////		System.out.println(json);
+		//		try 
+		//		{
+		//			PrintWriter pw = new PrintWriter(new File(file));
+		//			pw.write(json);
+		//			pw.close();
+		//		} 
+		//		catch (FileNotFoundException e) 
+		//		{
+		//			e.printStackTrace();
+		//			return;
+		//		}
+		
+		TempJson.saveToFile(file, this.cl);
+
+
 	}
 
 	@Override
@@ -145,8 +157,32 @@ public class Functions_GUI implements functions {
 		StdDraw.setCanvasSize(width,height);
 		StdDraw.setXscale(rx.get_min(), rx.get_max());
 		StdDraw.setYscale(ry.get_min(), ry.get_max());
-		StdDraw.line(rx.get_min(), 0, rx.get_max(), 0);
-		StdDraw.line(0,ry.get_min(), 0, ry.get_max());
+
+		//axis-y
+		for (int i=(int)ry.get_min();i<=(int)ry.get_max();i++) {
+			StdDraw.textRight(0, i, ""+i);
+			StdDraw.setPenRadius();
+			StdDraw.setPenColor(Color.DARK_GRAY);
+
+			if(i==0) {
+				StdDraw.setPenRadius(0.005);
+				StdDraw.setPenColor(Color.BLACK);
+			}
+			StdDraw.line( rx.get_min(), i, rx.get_max(),i);
+		}
+		// axis-x
+		for (int i=(int)rx.get_min();i<=(int)rx.get_max();i++) {
+
+			StdDraw.setPenRadius();
+			StdDraw.setPenColor(Color.DARK_GRAY);
+
+			if(i==0) {
+				StdDraw.setPenRadius(0.005);
+				StdDraw.setPenColor(Color.BLACK);
+			}
+			else StdDraw.text(i, 0.25, ""+i);
+			StdDraw.line(i,ry.get_min(),i,ry.get_max());
+		}
 		double rx_steps =(rx.get_max()-rx.get_min())/resolution;
 		for (int i = 0; i < this.size(); i++) {
 			StdDraw.setPenColor(Colors[i%7]);
@@ -176,9 +212,11 @@ public class Functions_GUI implements functions {
 			e.printStackTrace();
 		}
 
+	}
+	public ArrayList<function> getCl() {
+		return this.cl;
 
 	}
-
 
 
 
