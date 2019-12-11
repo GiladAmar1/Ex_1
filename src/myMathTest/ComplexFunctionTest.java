@@ -17,6 +17,10 @@ class ComplexFunctionTest {
 		ComplexFunction x=new ComplexFunction(new Polynom("x^2+2"));
 		Polynom y=new Polynom("x^2+2");
 		assertEquals(x.left(),y);
+		assertEquals(x.right(),null);
+		assertEquals(x.getOp(),Operation.None);
+
+		
 	}
 
 	@Test
@@ -114,6 +118,9 @@ class ComplexFunctionTest {
 		assertEquals(true,x.left().toString().equals(z.left().toString()));
 		assertEquals(true,x.right().toString().equals(z.right().toString()));
 		assertEquals(true,x.getOp().toString().equals(z.getOp().toString()));
+		x.max(new Polynom("200"));
+		assertEquals(200, x.f(2.35));
+
 	}
 
 	@Test
@@ -127,6 +134,8 @@ class ComplexFunctionTest {
 		assertEquals(true,x.left().toString().equals(z.left().toString()));
 		assertEquals(true,x.right().toString().equals(z.right().toString()));
 		assertEquals(true,x.getOp().toString().equals(z.getOp().toString()));
+		x.min(new Polynom("0.5x"));
+		assertEquals(1, x.f(2));
 	}
 
 	@Test
@@ -148,7 +157,6 @@ class ComplexFunctionTest {
 		assertEquals(true,x.left().equals(new Polynom("x^2")));
 		ComplexFunction x1=new ComplexFunction();
 		assertEquals(true, x1.left()==null);
-
 	}
 
 	@Test
@@ -174,11 +182,15 @@ class ComplexFunctionTest {
 	@Test
 	void testF() {
 		ComplexFunction x=new ComplexFunction(Operation.Divid,new Polynom("x^2"),new Polynom("x+2"));
-		double y=x.f(2);
 		assertEquals(1, x.f(2));
-		
-		
-		
+		x.plus(new Polynom("x^3+3"));
+		assertEquals(12, x.f(2));		
+		x.mul(new Polynom("x+3"));
+		assertEquals(110.07638888888889,x.f(2.5) );
+		x.max(new Polynom("200"));
+		assertEquals(200,x.f(2.5) );
+
+
 	}
 
 }
