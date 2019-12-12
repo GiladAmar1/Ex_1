@@ -4,8 +4,8 @@ public class TempDrow {
 	private int Width;
 	private int Height;
 	private int Resolution;
-	private Range Range_X;
-	private Range Range_Y;
+	private int[] Range_X= {0,1};
+	private int[] Range_Y= {0,1};
 	
 	
 	
@@ -13,8 +13,6 @@ public class TempDrow {
 		Width=512;
 		Height=512;
 		Resolution=500;
-		Range_X=new Range(0, 1);
-		Range_Y=new Range(0, 1);
 	}
 	
 	public  int getWidth() {
@@ -26,10 +24,10 @@ public class TempDrow {
 	public  int getResolution() {
 		return this.Resolution;
 	}
-	public  Range getRange_X() {
+	public  int[] getRange_X() {
 		return this.Range_X;
 	}
-	public  Range getRange_Y() {
+	public  int[] getRange_Y() {
 		return this.Range_Y;
 	}
 	

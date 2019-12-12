@@ -219,21 +219,20 @@ public class Functions_GUI implements functions {
 	public void drawFunctions(String json_file) {
 		// TODO Auto-generated method stub
 
-		try {
+	
 			try {
+				
 				Gson json= new Gson();
-				TempDrow t= json.fromJson(json_file,TempDrow.class);
-				drawFunctions(t.getWidth(), t.getHeight(),t.getRange_X(),t.getRange_Y() , t.getResolution());
+				FileReader reader = new FileReader(json_file);
+				TempDrow t= json.fromJson(reader,TempDrow.class);
+				drawFunctions(t.getWidth(), t.getHeight(),new Range(t.getRange_X()[0],t.getRange_X()[1]),new Range(t.getRange_Y()[0],t.getRange_Y()[1]) , t.getResolution());
 			}
 			catch (Exception e) {
+//				System.out.println(e);
 				TempDrow t=new TempDrow();
-				drawFunctions(t.getWidth(), t.getHeight(),t.getRange_X(),t.getRange_Y() , t.getResolution());
+				drawFunctions(t.getWidth(), t.getHeight(),new Range(t.getRange_X()[0],t.getRange_X()[1]),new Range(t.getRange_Y()[0],t.getRange_Y()[1]) , t.getResolution());
 			}
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		
 
 	}
 
