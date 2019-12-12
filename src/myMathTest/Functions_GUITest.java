@@ -1,4 +1,4 @@
-package Ex1Testing;
+package myMathTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
