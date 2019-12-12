@@ -48,12 +48,12 @@ public class Polynom implements Polynom_able{
 
 
 	private String deleteSpace(String s) {
-		StringBuilder t=null;
+		String t="";
 		for (int i = 0; i < s.length(); i++) {
 			if(s.charAt(i)!=' ')
-				t.append(s.charAt(i));
+				t+=s.charAt(i);
 		}
-		return t.toString();
+		return t;
 	}
 
 	/**
@@ -278,15 +278,15 @@ public class Polynom implements Polynom_able{
 	 */
 	public String toString() {
 		
-		StringBuilder ans=null;
+		String ans="";
 		Iterator<Monom> it=this.iteretor();
 		while(it.hasNext()) {
 			Monom t=it.next();
 			if(t.get_coefficient()>0&&ans!=null)
-				ans.append("+");
-			ans.append(t.toString());
+				ans+="+";
+			ans+=t.toString();
 		}
-		return ans.toString();
+		return ans;
 	}
 	@Override
 	public function initFromString(String s) {

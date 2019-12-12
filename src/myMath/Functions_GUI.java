@@ -220,13 +220,17 @@ public class Functions_GUI implements functions {
 		// TODO Auto-generated method stub
 
 		try {
-			initFromFile(json_file);
-			//defulte value
-			StdDraw.setCanvasSize();
-			StdDraw.setYscale();
-			StdDraw.setXscale();
-			drawFunctions(512, 512,new Range(0, 1),new Range(0,1) , 200);
-		}catch (Exception e) {
+			try {
+				Gson json= new Gson();
+				TempDrow t= json.fromJson(json_file,TempDrow.class);
+				drawFunctions(t.getWidth(), t.getHeight(),t.getRange_X(),t.getRange_Y() , t.getResolution());
+			}
+			catch (Exception e) {
+				TempDrow t=new TempDrow();
+				drawFunctions(t.getWidth(), t.getHeight(),t.getRange_X(),t.getRange_Y() , t.getResolution());
+			}
+		}
+		catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}

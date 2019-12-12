@@ -123,12 +123,12 @@ public class ComplexFunction implements complex_function {
 
 	//	the function delet oll the space from the String
 	private String deleteSpace(String s) {
-		StringBuilder t=null;
+		String t="";
 		for (int i = 0; i < s.length(); i++) {
 			if(s.charAt(i)!=' ')
-				t.append(s.charAt(i));
+				t+=s.charAt(i);
 		}
-		return t.toString();
+		return t;
 
 	}
 
