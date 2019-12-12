@@ -9,11 +9,13 @@ public class ComplexFunction implements complex_function {
 	private Operation op;
 	private String type="ComplexFunction";
 
-public ComplexFunction() {
-	this.left=null;
-	this.right=null;
-	this.op=Operation.None;
-}
+
+	//constractors
+	public ComplexFunction() {
+		this.left=null;
+		this.right=null;
+		this.op=Operation.None;
+	}
 	public ComplexFunction(function left) {
 		this.left=left;
 		this.right=null;
@@ -60,38 +62,42 @@ public ComplexFunction() {
 	//		this.left=x;
 	//
 	//	}
+
+
 	//Function for determining operation
 	private Operation getOpFromString(String op) {
 		op=op.toLowerCase();
-		if(op.equals("plus")) {
+		switch (op) {
+		case "plus":
 			return Operation.Plus;
-		}
-		if(op.equals("times")||op.equals("mul")) {
+		case "times":
 			return Operation.Times;
-		}
-		if(op.equals("divid")||op.equals("div")) {
+		case "mul":
+			return Operation.Times;
+		case "divid":
 			return Operation.Divid;
-		}
-		if(op.equals("max")) {
+		case "div":
+			return Operation.Divid;
+		case "max":
 			return Operation.Max;
-		}
-		if(op.equals("min")) {
+		case "min":
 			return Operation.Min;
-		}
-		if(op.equals("comp")) {
+		case "comp":
 			return Operation.Comp;
-		}
-		if(op.equals("none")) {
+		case "none":
 			return Operation.None;
+		default:
+			throw new RuntimeException("op is not from operturs in the enum");
 		}
-		return Operation.Error;
+		
+	
 	}
 
 	@Override
 	public function initFromString(String s) {
 		s=deleteSpace(s);
 		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
-			return new ComplexFunction( Operation.Error,null, null);
+			throw new RuntimeException("not can be a complex function");
 		if (s.indexOf('(')==-1) {
 			return new Polynom(s);
 		}
@@ -115,19 +121,21 @@ public ComplexFunction() {
 			return new ComplexFunction(op,initFromString(s.substring(0, i+1)),null);
 		return new ComplexFunction(op,initFromString(s.substring(0, i+1)),initFromString(s.substring(i+2, s.length())));
 	}
-	
+
+	//	the function delet oll the space from the String
 	private String deleteSpace(String s) {
-		String t = "";
+		StringBuilder t=null;
 		for (int i = 0; i < s.length(); i++) {
 			if(s.charAt(i)!=' ')
-				t+=s.charAt(i);
+				t.append(s.charAt(i));
 		}
-		return t;
+		return t.toString();
+
 	}
 
 	@Override
 	public function copy() {
-		function co=new ComplexFunction(getOp(), left(),right());
+		function co=new ComplexFunction(this.op, this.left,this.right);
 		return co;
 	}
 
@@ -139,7 +147,7 @@ public ComplexFunction() {
 			this.op=Operation.Plus;
 		}
 		else {
-			this.left=new ComplexFunction(getOp(), left(),right());
+			this.left=new ComplexFunction(this.op, this.left,this.right);
 			this.right=f1;
 			this.op=Operation.Plus;
 		}
@@ -154,8 +162,8 @@ public ComplexFunction() {
 			this.op=Operation.Times;
 		}
 		else {
-			this.left=new ComplexFunction(getOp(), left(),right());
-;
+			this.left=new ComplexFunction(this.op, this.left,this.right);
+			;
 			this.right=f1;
 			this.op=Operation.Times;
 		}
@@ -170,7 +178,7 @@ public ComplexFunction() {
 			this.op=Operation.Divid;
 		}
 		else {
-			this.left=new ComplexFunction(getOp(), left(),right());
+			this.left=new ComplexFunction(this.op, this.left,this.right);
 			this.right=f1;
 			this.op=Operation.Divid;
 		}
@@ -186,7 +194,7 @@ public ComplexFunction() {
 			this.op=Operation.Max;
 		}
 		else {
-			this.left=new ComplexFunction(getOp(), left(),right());
+			this.left=new ComplexFunction(this.op, this.left,this.right);
 			this.right=f1;
 			this.op=Operation.Max;
 		}
@@ -201,7 +209,7 @@ public ComplexFunction() {
 			this.op=Operation.Min;
 		}
 		else {
-			this.left=new ComplexFunction(getOp(), left(),right());
+			this.left=new ComplexFunction(this.op, this.left,this.right);
 			this.right=f1;
 			this.op=Operation.Min;
 		}
@@ -215,7 +223,7 @@ public ComplexFunction() {
 			this.op=Operation.Comp;
 		}
 		else {
-			this.left=new ComplexFunction(getOp(), left(),right());
+			this.left=new ComplexFunction(this.op, this.left,this.right);
 			this.right=f1;
 			this.op=Operation.Comp;
 		}
@@ -245,34 +253,38 @@ public ComplexFunction() {
 		double le=this.left.f(x);
 		double ri=this.right.f(x);
 
-		if(this.op==Operation.None) {
+		switch (this.op) {
+		case  None: {
 			return le;
 		}
-		if(this.op==Operation.Comp)
+		case  Comp: {
 			return this.left.f(ri);
-		if(this.op==Operation.Divid) {
+		}
+		case  Divid: {
 			if(ri==0) {
 				throw new RuntimeException("Dont divid 0");
 			}
 			return le/ri;
 		}
-		if(this.op==Operation.Max) {
+		case  Max: {
 			if(le>ri)
 				return le;
 			return ri;
 		}
-		if(this.op==Operation.Min) {
+		case  Min: {
 			if(le<ri)
 				return le;
 			return ri;
 		}
-		if(this.op==Operation.Plus) {
+		case  Plus: {
 			return le+ri;
 		}
-		if(this.op==Operation.Times) {
+		case  Times: {
 			return le*ri;
 		}
-		return 0;
+		default :
+			throw new RuntimeException("error");
+		}
 	}
 
 	public String toString() {

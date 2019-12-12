@@ -2,7 +2,7 @@ package myMathTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.experimental.max.MaxCore;
+
 import org.junit.jupiter.api.Test;
 
 import myMath.ComplexFunction;
@@ -175,9 +175,7 @@ class ComplexFunctionTest {
 	void testF() {
 		ComplexFunction x=new ComplexFunction(Operation.Divid,new Polynom("x^2"),new Polynom("x+2"));
 		double y=x.f(2);
-		assertEquals(1, x.f(2));
-		
-		
+		assertEquals(1, y);
 		
 	}
 

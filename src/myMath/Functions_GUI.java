@@ -196,12 +196,12 @@ public class Functions_GUI implements functions {
 
 			if(i==0) {
 				StdDraw.setPenRadius(0.005);
-				StdDraw.setPenColor(Color.BLACK);
-			}
+				StdDraw.setPenColor(Color.BLACK);		}
 			else StdDraw.text(i, 0.25, ""+i);
 			StdDraw.line(i,ry.get_min(),i,ry.get_max());
 		}
 		double rx_steps =(rx.get_max()-rx.get_min())/resolution;
+		//drow all the function in the collect function		
 		for (int i = 0; i < this.size(); i++) {
 			StdDraw.setPenColor(Colors[i%7]);
 			for (double j = rx.get_min(); j <rx.get_max(); j+=rx_steps) {
@@ -221,6 +221,7 @@ public class Functions_GUI implements functions {
 
 		try {
 			initFromFile(json_file);
+			//defulte value
 			StdDraw.setCanvasSize();
 			StdDraw.setYscale();
 			StdDraw.setXscale();
@@ -231,13 +232,13 @@ public class Functions_GUI implements functions {
 		}
 
 	}
+
 	public String toString() {
 		String ans="";
 		for (int i = 0; i < cl.size(); i++) {
 			ans+=cl.get(i).toString();
 		}
 		return ans;
-
 	}
 
 

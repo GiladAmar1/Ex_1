@@ -32,11 +32,11 @@ import myMath.functions;
 class Functions_GUITest {
 	public static void main(String[] a) {
 		functions data = FunctionsFactory();
-				int w=1000, h=600, res=200;
-				Range rx = new Range(-10,10);
-				Range ry = new Range(-5,15);
-				data.drawFunctions(w,h,rx,ry,res);
-		
+//				int w=1000, h=600, res=200;
+//				Range rx = new Range(-10,10);
+//				Range ry = new Range(-5,15);
+//				data.drawFunctions(w,h,rx,ry,res);
+//		
 		String file = "function_file.txt";
 		String file2 = "function_file2.txt";
 		try {
@@ -48,12 +48,12 @@ class Functions_GUITest {
 		catch(Exception e) {e.printStackTrace();}
 
 		String JSON_param_file = "GUI_params.txt";
-//		data.drawFunctions(file);
+		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
 	//	@BeforeAll
 	//	static void setUpBeforeClass() throws Exception {
-	//	}
+	//	} 
 
 	@BeforeEach
 	void setUp() throws Exception {
