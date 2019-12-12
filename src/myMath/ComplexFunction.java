@@ -89,11 +89,10 @@ public class ComplexFunction implements complex_function {
 		default:
 			throw new RuntimeException("op is not from operturs in the enum");
 		}
-		
-	
 	}
 
 	@Override
+	//	build new complex function from String
 	public function initFromString(String s) {
 		s=deleteSpace(s);
 		if (s.contains("error")||s.contains("null")&&s.indexOf(("null"))!=s.length()-5)
